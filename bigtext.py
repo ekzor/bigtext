@@ -5,7 +5,7 @@ class BigText(object):
   big_chars = {
     '6x5' : {
       'A' : ['CCCCCC','CC  CC','CCCCCC','CC  CC','CC  CC'],
-      'B' : ['CCCCC ','CC CC ','CCCCC ','CC  CC','CCCCCC'],
+      'B' : ['CCCCC ','CC  CC','CCCCC ','CC  CC','CCCCCC'],
       'C' : ['CCCCCC','CC    ','CC    ','CC    ','CCCCCC'],
       'D' : ['CCCCC ','CC   C','CC   C','CC   C','CCCCC '],
       'E' : ['CCCCCC','CC    ','CCCC  ','CC    ','CCCCCC'],
