@@ -21,7 +21,7 @@ class BigText(object):
       'O' : ['CCCCCC','CC  CC','CC  CC','CC  CC','CCCCCC'],
       'P' : ['CCCCCCC','CC   CC','CCCCCCC','CC     ','CC'],
       'Q' : [' CCCC ','C    C','C    C','C  C C',' CCCCC'],
-      'R' : ['CCCCCC','CC  CC','CCCC  ','CC CC ','CC  CC'],
+      'R' : ['CCCCC ','CC   C','CCCCC ','CC  C ','CC   C'],
       'S' : [' CCCCC','CC    ','  CCC ','    CC','CCCCC '],
       'T' : ['CCCCCC','  CC  ','  CC  ','  CC  ','  CC  '],
       'U' : ['CC  CC','CC  CC','CC  CC','CC  CC','CCCCCC'],
@@ -46,7 +46,7 @@ class BigText(object):
     }
   }
 
-  def __init__(self,phrase,pieces,spacer_chars=" ",spacer_words="  ",padding=" ",before="",reset_each_line=True,charwidth=6,lineheight=5):
+  def __init__(self,phrase,pieces,spacer_chars="  ",spacer_words="   ",padding=" ",before="",reset_each_line=True,charwidth=6,lineheight=5):
     self.phrase = phrase.upper()  #convert phrase to uppercase, since upper-case fonts are only supported at this time
     self.pieces = pieces
     self.width = charwidth
@@ -95,15 +95,21 @@ class BigText(object):
   def make_output(self,reset_each_line=True):
     #use shape to generate output
     output = [self.before for _ in range(self.height)]
+    #track position in the piece string
     piece_index = 0
+    #loop through all lines in the shape, as defined by self.height.
     for line in range(self.height):
+      #loop through the characters in the line
       for char in self.shape[line]:
+        #if it's a character to be filled, throw in the next character from the pieces string
         if char == "C":
           output[line] += self.pieces[piece_index%len(self.pieces)]
           piece_index += 1
+        #if it's a space, throw in our padding character
         elif char == " ":
           output[line] += self.padding
-          
+      
+      #reset the piece_index if we're meant to reset for each line
       piece_index *= not(reset_each_line)
       
     return output
@@ -114,17 +120,12 @@ if __name__ == '__main__':
   argparser = ap.ArgumentParser()
   argparser.add_argument("big", help="characters to make big")
   argparser.add_argument("pieces", help="characters to fill in the big text shape")
-  argparser.add_argument("-c", "--charsep", help="separator between big characters",default=" ")
-  argparser.add_argument("-w", "--wordsep", help="separator between big words",default="  ")
+  argparser.add_argument("-c", "--charsep", help="separator between big characters",default="  ")
+  argparser.add_argument("-w", "--wordsep", help="separator between big words",default="   ")
   argparser.add_argument("-p", "--padding", help="padding character for blank spots in big characters", default=" ")
   argparser.add_argument("-b", "--before", help="prepend each line with these characters. useful for forum formatting", default="")
-  argparser.add_argument("-r", "--linereset", help="start each line at the beginning of the pieces string",action='store_false')
+  argparser.add_argument("-r", "--nolinereset", help="start each line at the beginning of the pieces string",action='store_false')
   args = argparser.parse_args()
-  
-  if args.padding == None or len(args.padding) == 0:
-    args.padding = " "
-  if len(args.padding) > 1:
-    args.padding = args.padding[0]
     
-  bt = BigText(args.big,args.pieces,args.charsep,args.wordsep,args.padding,args.before,args.linereset)
+  bt = BigText(args.big,args.pieces,args.charsep,args.wordsep,args.padding,args.before,args.nolinereset)
   print '\n' + bt.get_output() + '\n'
