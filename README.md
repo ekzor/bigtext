@@ -34,3 +34,15 @@ BARB....AR..BA..RB..AR
 BA......RB..AR..BA..RB
 BA......RBARBA..RBARBA
 ```
+
+Use quotation marks to get spaces:
+```
+$ ./bigtext.py -r "foo bar" "HELLOWORLD"
+
+HELLOW  ORLDHE  LLOWOR     LDHEL   LOWORL  DHELL
+OW      OR  LD  HE  LL     OW  OR  LD  HE  LL   O
+WORL    DH  EL  LO  WO     RLDHE   LLOWOR  LDHEL
+LO      WO  RL  DH  EL     LO  WO  RL  DH  EL  L
+OW      ORLDHE  LLOWOR     LDHELL  OW  OR  LD   H
+
+```
