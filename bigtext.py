@@ -19,7 +19,7 @@ class BigText(object):
       'M' : ['C    C','CC  CC','C CC C','C    C','C    C'],
       'N' : ['CC   C','CCC  C','CC C C','CC  CC','CC   C'],
       'O' : ['CCCCCC','CC  CC','CC  CC','CC  CC','CCCCCC'],
-      'P' : ['CCCCCCC','CC   CC','CCCCCCC','CC     ','CC'],
+      'P' : ['CCCCCC','CC  CC','CCCCCC','CC    ','CC    '],
       'Q' : [' CCCC ','C    C','C    C','C  C C',' CCCCC'],
       'R' : ['CCCCC ','CC   C','CCCCC ','CC  C ','CC   C'],
       'S' : [' CCCCC','CC    ','  CCC ','    CC','CCCCC '],
